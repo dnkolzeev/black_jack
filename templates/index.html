@@ -3,5 +3,14 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
- <h1>Hello, {{ name }}!</h1>
+
+<!-- Кнопка для вытягивания карт -->
+<a href='/draw'>
+	<button action='/draw'>
+		draw card 
+	</button>
+</a>
+<br>
+{{result}}
+
 {% endblock %}
