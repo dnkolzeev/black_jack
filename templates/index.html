@@ -11,6 +11,18 @@
 	</button>
 </a>
 <br>
-{{result}}
+
+{% if card %}
+
+
+<img src={{card_image}} alt="new card">
+
+{{card_value}}
+<b>
+	{{card_code}}
+</b>
+
+
+{% endif %}
 
 {% endblock %}
