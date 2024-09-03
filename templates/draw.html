@@ -14,14 +14,17 @@
 
 {% if card %}
 
+{% for card in cards %}
+	<img src={{card}} alt="new card">
+{% endfor %}
 
-<img src={{card_image}} alt="new card">
+
+
 
 {{card_value}}
 <b>
 	{{card_code}}
 </b>
-{{cards}}
 
 
 {% endif %}

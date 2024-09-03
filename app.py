@@ -23,9 +23,8 @@ def get_deck():
 	card_image = card ['image']
 	card_value = card ['value']
 	card_code = card ['code']
-	cards.append(card_value)
-	  
-  return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code, cards=cards)
+	cards.append(card_image)
+	return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code, cards=cards)
 
 if __name__ == '__main__':
   app.run(debug=True)
