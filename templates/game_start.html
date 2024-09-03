@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+Мы почесали твою колоду:
+<b>
+	{{deck_id}}
+</b>
+
+<!-- Кнопка для вытягивания карт -->
+<a href='/draw'>
+	<button action='/draw'>
+		Draw card 
+	</button>
+</a>
+<br>
+
+
+{% endblock %}

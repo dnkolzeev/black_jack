@@ -4,25 +4,8 @@
 
 {% block content %}
 
-<!-- Кнопка для вытягивания карт -->
-<a href='/draw'>
-	<button action='/draw'>
-		draw card 
-	</button>
-</a>
-<br>
+<!-- Кнопка для старта -->
+<button type="button" onclick='window.location="/game_start"')>Новая игра</button>
 
-{% if card %}
-
-
-<img src={{card_image}} alt="new card">
-
-{{card_value}}
-<b>
-	{{card_code}}
-</b>
-
-
-{% endif %}
 
 {% endblock %}

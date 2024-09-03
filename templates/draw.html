@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Кнопка для вытягивания карт -->
+<a href='/draw'>
+	<button action='/draw'>
+		Draw card 
+	</button>
+</a>
+<br>
+
+{% if card %}
+
+
+<img src={{card_image}} alt="new card">
+
+{{card_value}}
+<b>
+	{{card_code}}
+</b>
+
+
+{% endif %}
+
+{% endblock %}
