@@ -9,6 +9,7 @@ def start():
 	return render_template('index.html')
 
 deck_id= json.loads(requests.post('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').text)['deck_id']
+cards=[]
 
 @app.route('/game_start')
 def id(): 
@@ -16,13 +17,15 @@ def id():
 
 @app.route('/draw')
 def get_deck():
-  deck_id= json.loads(requests.post('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').text)['deck_id']
-  card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
-  card_image = card ['image']
-  card_value = card ['value']
-  card_code = card ['code']
-  
-  return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code)
+	
+	deck_id= json.loads(requests.post('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').text)['deck_id']
+	card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
+	card_image = card ['image']
+	card_value = card ['value']
+	card_code = card ['code']
+	cards.append(card_value)
+	  
+  return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code, cards=cards)
 
 if __name__ == '__main__':
   app.run(debug=True)
