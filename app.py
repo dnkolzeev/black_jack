@@ -58,7 +58,19 @@ def get_deck():
 
 @app.route('/finita')
 def finish():
-  	return render_template('finita.html')
+    deck_id = session.get('deck_id')
+    card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
+    dealer_cards = []
+    dealer_points = []
+    dealer_points_sum = 0
+
+
+    while dealer_points_sum < 17:
+      dealer_card_value = card ['value']
+      dealer_card_point = converter(dealer_card_value)
+      dealer_points_sum = dealer_points_sum + dealer_card_point
+
+    return render_template('finita.html', dealer_points_sum = dealer_points_sum)
   
 if __name__ == '__main__':
   app.run(debug=True)
