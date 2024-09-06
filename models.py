@@ -3,21 +3,11 @@ from flask import Flask, render_template, session
 from flask_session import Session
 import json
 import requests
-from models import CARDS, db
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+
 
 
 
 app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-
-# связываем приложение и экземпляр SQLAlchemy
-db.init_app(app)
-#создаем все, что есть в db.Models
-with app.app_context():
-    db.create_all()
 
 app.config ['SECRET_KEY'] = 'secret_key'
 app.config ['SESSION_TYPE'] = 'filesystem'
@@ -68,7 +58,19 @@ def get_deck():
 
 @app.route('/finita')
 def finish():
-  	return render_template('finita.html')
+    deck_id = session.get('deck_id')
+    card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
+    dealer_cards = []
+    dealer_points = []
+    dealer_points_sum = 0
+
+
+    while dealer_points_sum < 17:
+      dealer_card_value = card ['value']
+      dealer_card_point = converter(dealer_card_value)
+      dealer_points_sum = dealer_points_sum + dealer_card_point
+
+    return render_template('finita.html', dealer_points_sum = dealer_points_sum)
   
 if __name__ == '__main__':
   app.run(debug=True)
