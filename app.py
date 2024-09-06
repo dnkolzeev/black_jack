@@ -45,7 +45,6 @@ def id():
 #Стол игрока
 @app.route('/draw')
 def get_deck():
-	
   deck_id = session.get('deck_id')
   card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
   card_image = card ['image']
@@ -55,8 +54,11 @@ def get_deck():
   card_point = converter(card_value)
   points.append(card_point)
   points_sum = sum(points)
-  
   return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code, cards=cards, card_point = card_point, points_sum = points_sum)
 
+@app.route('/finita')
+def finish():
+  	return render_template('finita.html')
+  
 if __name__ == '__main__':
   app.run(debug=True)

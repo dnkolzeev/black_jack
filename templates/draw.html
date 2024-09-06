@@ -6,10 +6,17 @@
 
 <!-- Кнопка для вытягивания карт -->
 <a href='/draw'>
-	<button action='/draw' class = 'btn btn-warning'>
+	<button action='/draw' class="btn btn-warning">
 		Draw card 
 	</button>
 </a>
+
+<a href='/finita'>
+	<button action='/finita' class="btn btn-warning">
+		Finita la comedia 
+	</button>
+</a>
+
 <br>
 
 {% if card %}
@@ -22,8 +29,10 @@
 
 
 
+<b>
+	{{points_sum}}, Ты - лошара!
+</b>
 
-У тебя {{points_sum}} очков, ты лошара
 
 {% endif %}
 
