@@ -1,0 +1,21 @@
+{%for row in cards_db%}
+<div class = 'row'>
+
+ <div class = 'column'>
+   {{row.deck_id}}
+ </div>
+
+ <div class = 'column'>
+   {{row.username}}
+ </div>
+
+ <div class = 'column'>
+   {{row.card}}
+ </div>
+
+ <div class = 'column'>
+   {{row.datetime}}
+ </div>
+
+</div>
+{% endfor %}

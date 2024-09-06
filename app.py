@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -63,33 +64,18 @@ def get_deck():
   card_point = converter(card_value)
   points.append(card_point)
   points_sum = sum(points)
-
-  new_card_to_db = CARDS (
-    deck_id = session.get('deck_id'),
-    datetime = datetime.now(),
-    card = card['code'])
-  db.session.add(new_card_to_db)
-  db.session.commit()
-
   return render_template('draw.html',card=card, card_image=card_image, card_value=card_value, card_code=card_code, cards=cards, card_point = card_point, points_sum = points_sum)
-
-
 
 @app.route('/finita')
 def finish():
-    deck_id = session.get('deck_id')
-    card=json.loads(requests.post('https://deckofcardsapi.com/api/deck/' +deck_id +'/draw/?count=1').text)['cards'][0]
-    dealer_cards = []
-    dealer_points = []
-    dealer_points_sum = 0
+  	return render_template('finita.html')
+	
+@app.route('/view_db')
+def view_db():
+    cards_db = CARDS.query.all()
+    return
 
-
-    while dealer_points_sum < 17:
-      dealer_card_value = card ['value']
-      dealer_card_point = converter(dealer_card_value)
-      dealer_points_sum = dealer_points_sum + dealer_card_point
-
-    return render_template('finita.html', dealer_points_sum = dealer_points_sum)
+render_template('view_db.html', cards_db=cards_db)
   
 if __name__ == '__main__':
   app.run(debug=True)
